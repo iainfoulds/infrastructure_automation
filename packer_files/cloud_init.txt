@@ -9,7 +9,7 @@ write_files:
   - path: /etc/docker/daemon.json
     content: |
       {
-        "hosts": ["fd://","tcp://127.0.0.1:2376"]
+        "hosts": ["fd://","tcp://127.0.0.1:2375"]
       }
 runcmd:
   - wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
