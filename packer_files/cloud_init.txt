@@ -19,3 +19,4 @@ runcmd:
   - usermod -aG docker azureuser
   - usermod -aG docker jenkins
   - service jenkins restart
+  - ls
