@@ -1,0 +1,26 @@
+#cloud-config
+package_upgrade: true
+write_files:
+  - path: /etc/systemd/system/docker.service.d/docker.conf
+    content: |
+      [Service]
+        ExecStart=
+        ExecStart=/usr/bin/dockerd
+  - path: /etc/docker/daemon.json
+    content: |
+      {
+        "hosts": ["fd://","tcp://127.0.0.1:2375"]
+      }
+runcmd:
+  - wget https://releases.hashicorp.com/packer/1.2.3/packer_1.2.3_linux_amd64.zip
+  - apt-get install unzip -y
+  - unzip packer_1.2.3_linux_amd64.zip
+  - mv packer /usr/local/bin/packer
+  - apt install default-jre -y
+  - wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+  - sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+  - apt-get update && apt-get install jenkins -y
+  - curl -sSL https://get.docker.com/ | sh
+  - usermod -aG docker azureuser
+  - usermod -aG docker jenkins
+  - service jenkins restart
