@@ -1,6 +1,6 @@
 {
   "builders": [{
-    "type": "azure-arm",
+    "type": "azure-arm", dhkj
 
     "client_id": "{{user `client_id`}}",
     "client_secret": "{{user `client_secret`}}",
