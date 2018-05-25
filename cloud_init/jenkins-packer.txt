@@ -1,5 +1,5 @@
 #cloud-config
-package_upgrade: true
+package_upgrade: false
 write_files:
   - path: /etc/systemd/system/docker.service.d/docker.conf
     content: |
